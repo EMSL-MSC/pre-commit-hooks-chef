@@ -1,0 +1,17 @@
+environment:
+    matrix:
+        - TOXENV: py27
+        - TOXENV: py35
+
+install:
+    - "SET PATH=C:\\Python35;C:\\Python35\\Scripts;%PATH%"
+    - pip install tox
+
+# Not a C# project
+build: false
+
+test_script: tox
+
+cache:
+  - '%LOCALAPPDATA%\pip\cache'
+  - '%USERPROFILE%\.pre-commit'
