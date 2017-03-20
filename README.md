@@ -22,7 +22,9 @@ Add this to your `.pre-commit-config.yaml`
 
 ### Hooks available
 
-- `check_rspec` - run rspec on chef recipes.
+- `check-rspec` - run rspec on chef recipes.
+- `check-foodcritic` - run foodcritic on chef cookbooks.
+- `check-cookstyle` - run cookstyle on specific cookbook files.
 
 ### As a standalone package
 
