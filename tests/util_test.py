@@ -2,12 +2,14 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import os
 import sys
 
 import pytest
 
 from pre_commit_hooks.util import CalledProcessError
 from pre_commit_hooks.util import cmd_output
+from pre_commit_hooks.util import parse_command
 
 
 def test_raises_on_error():
@@ -30,3 +32,15 @@ def test_output_error():
 def test_output():
     ret = cmd_output('sh', '-c', 'echo hi')
     assert ret == 'hi\n'
+
+
+def test_parse_command_basic():
+    assert parse_command('cp') == '/bin/cp'
+
+
+def test_parse_command_with_ext():
+    old_path = os.getenv('PATH')
+    os.environ['PATHEXT'] = '.conf'
+    os.environ['PATH'] = '/etc'
+    assert parse_command('adduser') == '/etc/adduser.conf'
+    os.environ['PATH'] = old_path
